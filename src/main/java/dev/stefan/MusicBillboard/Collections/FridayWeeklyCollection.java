@@ -11,79 +11,78 @@ import org.springframework.beans.factory.annotation.Value;
 import dev.stefan.MusicBillboard.Bean.MusicInfo;
 import dev.stefan.MusicBillboard.Enum.MusicStyleEnum;
 import dev.stefan.MusicBillboard.Enum.MusicTypeEnum;
-import dev.stefan.MusicBillboard.Expection.WeeklyMusicInfoException;
+import dev.stefan.MusicBillboard.Expection.MusicInfoException;
 import dev.stefan.MusicBillboard.Weekly.FridayWeekly;
 
-public class FridayWeeklyCollection {
+public class FridayWeeklyCollection extends BasicCollection{
 	
 	@Autowired
 	private FridayWeekly fridayWeekly;
-	
-	private Map<String, List<MusicInfo>> fridayMusicInfoMap;
 	
 	@Value("${friday.url}")
 	private String url;
 
 	@Value("${weekly.new.track}")
-	private String newTrack;
+	private String newTrackSheet;
 
 	@Value("${weekly.new.album}")
-	private String newAlbum;
+	private String newAlbumSheet;
 
 	@Value("${weekly.mandarin.track}")
-	private String mandarinTrack;
+	private String mandarinTrackSheet;
 
 	@Value("${weekly.mandarin.album}")
-	private String mandarinAlbum;
+	private String mandarinAlbumSheet;
 
 	@Value("${weekly.tv.track}")
-	private String tvTrack;
+	private String tvTrackSheet;
 
 	@Value("${weekly.tv.album}")
-	private String tvAlbum;
+	private String tvAlbumSheet;
 	
 	@Value("${weekly.movie.track}")
-	private String movieTrack;
+	private String movieTrackSheet;
 	
 	@Value("${weekly.movie.album}")
-	private String movieAlbum;
+	private String movieAlbumSheet;
 	
-	public Map<String, List<MusicInfo>> getFridayAll(WebDriver webDriver) throws WeeklyMusicInfoException{
-		fridayMusicInfoMap = new HashedMap<String, List<MusicInfo>>();
+	public Map<String, List<MusicInfo>> getMusicInfo(WebDriver webDriver) throws MusicInfoException{
+		musicInfoMap = new HashedMap<String, List<MusicInfo>>();
+		System.out.println("開始取得Friday週榜資料");
 		
-		fridayMusicInfoMap.put(newTrack,
+		musicInfoMap.put(newTrackSheet,
 				fridayWeekly.getWeeklyWorkInfo(new Object[] 
 						{webDriver, url, MusicStyleEnum.新歌, MusicTypeEnum.單曲}));
 		
-		fridayMusicInfoMap.put(newAlbum,
+		musicInfoMap.put(newAlbumSheet,
 				fridayWeekly.getWeeklyWorkInfo(new Object[] 
 						{webDriver, url, MusicStyleEnum.新歌, MusicTypeEnum.專輯}));
 		
-		fridayMusicInfoMap.put(mandarinTrack, 
+		musicInfoMap.put(mandarinTrackSheet, 
 				fridayWeekly.getWeeklyWorkInfo(new Object[] 
 						{webDriver, url, MusicStyleEnum.國語, MusicTypeEnum.單曲}));
 		
-		fridayMusicInfoMap.put(mandarinAlbum, 
+		musicInfoMap.put(mandarinAlbumSheet, 
 				fridayWeekly.getWeeklyWorkInfo(new Object[] 
 						{webDriver, url, MusicStyleEnum.國語, MusicTypeEnum.專輯}));
 		
-		fridayMusicInfoMap.put(tvTrack, 
+		musicInfoMap.put(tvTrackSheet, 
 				fridayWeekly.getWeeklyWorkInfo(new Object[] 
 						{webDriver, url, MusicStyleEnum.電視, MusicTypeEnum.單曲}));
 		
-		fridayMusicInfoMap.put(tvAlbum, 
+		musicInfoMap.put(tvAlbumSheet, 
 				fridayWeekly.getWeeklyWorkInfo(new Object[] 
 						{webDriver, url, MusicStyleEnum.電視, MusicTypeEnum.專輯}));
 		
-		fridayMusicInfoMap.put(movieTrack, 
+		musicInfoMap.put(movieTrackSheet, 
 				fridayWeekly.getWeeklyWorkInfo(new Object[] 
 						{webDriver, url, MusicStyleEnum.電影, MusicTypeEnum.單曲}));
 		
-		fridayMusicInfoMap.put(movieAlbum, 
+		musicInfoMap.put(movieAlbumSheet, 
 				fridayWeekly.getWeeklyWorkInfo(new Object[] 
 						{webDriver, url, MusicStyleEnum.電影, MusicTypeEnum.專輯}));
 		
-		return fridayMusicInfoMap;
+		return musicInfoMap;
 	}
 	
 }

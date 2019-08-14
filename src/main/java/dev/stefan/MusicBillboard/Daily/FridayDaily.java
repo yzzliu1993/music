@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
 import dev.stefan.MusicBillboard.Bean.MusicInfo;
 import dev.stefan.MusicBillboard.Enum.MusicStyleEnum;
 import dev.stefan.MusicBillboard.Enum.MusicTypeEnum;
-import dev.stefan.MusicBillboard.Expection.DailyMusicInfoException;
+import dev.stefan.MusicBillboard.Expection.MusicInfoException;
 
 public class FridayDaily implements DailyWork {
 
@@ -31,11 +31,11 @@ public class FridayDaily implements DailyWork {
 
 	private String url;
 
-	public List<MusicInfo> getDailyMusicInfos(Object... object) throws DailyMusicInfoException {
+	public List<MusicInfo> getDailyMusicInfos(Object... object) throws MusicInfoException {
 
 		if (!(object[0] instanceof WebDriver) || !(object[1] instanceof String)
 				|| !(object[2] instanceof MusicStyleEnum) || !(object[3] instanceof MusicTypeEnum))
-			throw new DailyMusicInfoException(PARA_MESSAGE);
+			throw new MusicInfoException(PARA_MESSAGE);
 
 		webDriver = (WebDriver) object[0];
 		url = (String) object[1];
@@ -94,7 +94,7 @@ public class FridayDaily implements DailyWork {
 				musicInfoList.add(musicInfo);
 			}
 		} catch (InterruptedException e) {
-			throw new DailyMusicInfoException(CLICK_MESSAGE);
+			throw new MusicInfoException(CLICK_MESSAGE);
 		}
 
 		return musicInfoList;

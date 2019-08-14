@@ -12,64 +12,62 @@ import dev.stefan.MusicBillboard.Bean.MusicInfo;
 import dev.stefan.MusicBillboard.Daily.FridayDaily;
 import dev.stefan.MusicBillboard.Enum.MusicStyleEnum;
 import dev.stefan.MusicBillboard.Enum.MusicTypeEnum;
-import dev.stefan.MusicBillboard.Expection.DailyMusicInfoException;
+import dev.stefan.MusicBillboard.Expection.MusicInfoException;
 
-public class FridayDailyCollection {
+public class FridayDailyCollection extends BasicCollection{
 
 	@Autowired
 	private FridayDaily fridayDaily;
-	
-	private Map<String, List<MusicInfo>> fridayMusicInfoMap;
 	
 	@Value("${friday.url}")
 	private String url;
 	
 	@Value("${daily.new.track}")
-	private String newTrack;
+	private String newTrackSheet;
 	
 	@Value("${daily.new.album}")
-	private String newAlbum;
+	private String newAlbumSheet;
 	
 	@Value("${daily.mandarin.track}")
-	private String mandarinTrack;
+	private String mandarinTrackSheet;
 	
 	@Value("${daily.mandarin.album}")
-	private String mandarinAlbum;
+	private String mandarinAlbumSheet;
 	
 	@Value("${daily.tv.track}")
-	private String tvTrack;
+	private String tvTrackSheet;
 	
 	@Value("${daily.tv.album}")
-	private String tvAlbum;
+	private String tvAlbumSheet;
 	
-	public Map<String, List<MusicInfo>> getFridayAll(WebDriver webDriver) throws DailyMusicInfoException {
-		fridayMusicInfoMap = new HashedMap<String, List<MusicInfo>>();
+	public Map<String, List<MusicInfo>> getMusicInfo(WebDriver webDriver) throws MusicInfoException {
+		musicInfoMap = new HashedMap<String, List<MusicInfo>>();
 		System.out.println("開始取得Friday日榜資料.......");
-		fridayMusicInfoMap.put(newTrack, 
+		musicInfoMap.put(newTrackSheet, 
 				fridayDaily.getDailyMusicInfos(new Object[] 
 						{webDriver, url, MusicStyleEnum.新歌, MusicTypeEnum.單曲}));
 		
-		fridayMusicInfoMap.put(newAlbum, 
+		musicInfoMap.put(newAlbumSheet, 
 				fridayDaily.getDailyMusicInfos(new Object[] 
 						{webDriver, url, MusicStyleEnum.新歌, MusicTypeEnum.專輯}));
 		
-		fridayMusicInfoMap.put(mandarinTrack, 
+		musicInfoMap.put(mandarinTrackSheet, 
 				fridayDaily.getDailyMusicInfos(new Object[] 
 						{webDriver, url, MusicStyleEnum.國語, MusicTypeEnum.單曲}));
 		
-		fridayMusicInfoMap.put(mandarinAlbum, 
+		musicInfoMap.put(mandarinAlbumSheet, 
 				fridayDaily.getDailyMusicInfos(new Object[] 
 						{webDriver, url, MusicStyleEnum.國語, MusicTypeEnum.專輯}));
 		
-		fridayMusicInfoMap.put(tvTrack, 
+		musicInfoMap.put(tvTrackSheet, 
 				fridayDaily.getDailyMusicInfos(new Object[] 
 						{webDriver, url, MusicStyleEnum.電視, MusicTypeEnum.單曲}));
 		
-		fridayMusicInfoMap.put(tvAlbum, 
+		musicInfoMap.put(tvAlbumSheet, 
 				fridayDaily.getDailyMusicInfos(new Object[] 
 						{webDriver, url, MusicStyleEnum.電視, MusicTypeEnum.專輯}));
 		
-		return fridayMusicInfoMap;
+		return musicInfoMap;
 	}
 	
 }
