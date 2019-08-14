@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import dev.stefan.MusicBillboard.Bean.MusicInfo;
 import dev.stefan.MusicBillboard.Daily.SpotifyDaily;
 import dev.stefan.MusicBillboard.Expection.MusicInfoException;
+import dev.stefan.MusicBillboard.Operator.Spotify;
 
 public class SpotifyDailyCollection extends BasicCollection {
 
@@ -35,9 +36,9 @@ public class SpotifyDailyCollection extends BasicCollection {
 
 		musicInfoMap = new HashedMap<String, List<MusicInfo>>();
 
-		musicInfoMap.put(hongkongSheet, spotifyDaily.getDailyMusicInfos(new Object[] { webDriver, hongkongUrl }));
+		musicInfoMap.put(hongkongSheet, spotifyDaily.getDailyMusicInfos(new Spotify(webDriver, hongkongUrl)));
 
-		musicInfoMap.put(taiwanSheet, spotifyDaily.getDailyMusicInfos(new Object[] { webDriver, taiwanUrl }));
+		musicInfoMap.put(taiwanSheet, spotifyDaily.getDailyMusicInfos(new Spotify(webDriver, taiwanUrl)));
 
 		return musicInfoMap;
 	}

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 import dev.stefan.MusicBillboard.Bean.MusicInfo;
 import dev.stefan.MusicBillboard.Expection.MusicInfoException;
+import dev.stefan.MusicBillboard.Operator.Spotify;
 import dev.stefan.MusicBillboard.Weekly.SpotifyWeekly;
 
 public class SpotifyWeeklyCollection extends BasicCollection {
@@ -35,9 +36,9 @@ public class SpotifyWeeklyCollection extends BasicCollection {
 
 		musicInfoMap = new HashedMap<String, List<MusicInfo>>();
 
-		musicInfoMap.put(hongkongSheet, spotifyWeekly.getWeeklyWorkInfo(new Object[] { webDriver, hongknogUrl }));
+		musicInfoMap.put(hongkongSheet, spotifyWeekly.getWeeklyWorkInfo(new Spotify(webDriver, hongknogUrl)));
 
-		musicInfoMap.put(taiwanSheet, spotifyWeekly.getWeeklyWorkInfo(new Object[] { webDriver, taiwanUrl }));
+		musicInfoMap.put(taiwanSheet, spotifyWeekly.getWeeklyWorkInfo(new Spotify(webDriver, taiwanUrl)));
 
 		return musicInfoMap;
 	}

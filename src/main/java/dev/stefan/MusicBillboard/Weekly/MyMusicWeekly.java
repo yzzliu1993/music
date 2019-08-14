@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 
 import dev.stefan.MusicBillboard.Bean.MusicInfo;
 import dev.stefan.MusicBillboard.Expection.MusicInfoException;
+import dev.stefan.MusicBillboard.Operator.BasicOperator;
 
 public class MyMusicWeekly implements WeeklyWork {
 
@@ -27,14 +28,16 @@ public class MyMusicWeekly implements WeeklyWork {
 	private int pageNum;
 
 	@Override
-	public List<MusicInfo> getWeeklyWorkInfo(Object... object) throws MusicInfoException {
+	public List<MusicInfo> getWeeklyWorkInfo(BasicOperator basicBean) throws MusicInfoException {
 
-		if (!(object[0] instanceof WebDriver) || !(object[1] instanceof String) || !(object[2] instanceof Integer))
+		if (!(basicBean.getObjectArray()[0] instanceof WebDriver) 
+				|| !(basicBean.getObjectArray()[1] instanceof String)
+				|| !(basicBean.getObjectArray()[2] instanceof Integer))
 			throw new MusicInfoException(Para_Message);
 
-		webDriver = (WebDriver) object[0];
-		url = (String) object[1];
-		pageNum = (Integer) object[2];
+		webDriver = (WebDriver) basicBean.getObjectArray()[0];
+		url = (String) basicBean.getObjectArray()[1];
+		pageNum = (Integer) basicBean.getObjectArray()[2];
 		musicInfoList = new ArrayList<MusicInfo>();
 
 		try {

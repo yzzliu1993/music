@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 
 import dev.stefan.MusicBillboard.Bean.MusicInfo;
 import dev.stefan.MusicBillboard.Expection.MusicInfoException;
+import dev.stefan.MusicBillboard.Operator.BasicOperator;
 
 public class AppleMusicDaily implements DailyWork {
 
@@ -25,13 +26,13 @@ public class AppleMusicDaily implements DailyWork {
 	private String url;
 
 	@Override
-	public List<MusicInfo> getDailyMusicInfos(Object... object) throws MusicInfoException {
+	public List<MusicInfo> getDailyMusicInfos(BasicOperator basicBean) throws MusicInfoException {
 
-		if (!(object[0] instanceof WebDriver) || !(object[1] instanceof String))
+		if (!(basicBean.getObjectArray()[0] instanceof WebDriver) || !(basicBean.getObjectArray()[1] instanceof String))
 			throw new MusicInfoException(Para_Message);
 
-		webDriver = (WebDriver) object[0];
-		url = (String) object[1];
+		webDriver = (WebDriver) basicBean.getObjectArray()[0];
+		url = (String) basicBean.getObjectArray()[1];
 		musicInfoList = new ArrayList<MusicInfo>();
 
 		try {

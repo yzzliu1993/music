@@ -12,6 +12,7 @@ import dev.stefan.MusicBillboard.Bean.MusicInfo;
 import dev.stefan.MusicBillboard.Daily.AppleMusicDaily;
 import dev.stefan.MusicBillboard.Daily.ItunesDaily;
 import dev.stefan.MusicBillboard.Expection.MusicInfoException;
+import dev.stefan.MusicBillboard.Operator.Itunes;
 
 public class ItunesDailyCollection extends BasicCollection {
 
@@ -39,20 +40,19 @@ public class ItunesDailyCollection extends BasicCollection {
 	@Value("${itunes.daily.apple.track}")
 	private String appleTrackSheet;
 	
-	
 	public Map<String, List<MusicInfo>> getMusicInfo(WebDriver webDriver) throws MusicInfoException {
 		System.out.println("開始取得iTunes日榜資料.......");
 		
 		musicInfoMap = new HashedMap<String, List<MusicInfo>>();
 		
 		musicInfoMap.put(itunesTrackSheet, 
-				itunesDaily.getDailyMusicInfos(new Object[] {webDriver, trackUrl}));
+				itunesDaily.getDailyMusicInfos(new Itunes(webDriver, trackUrl)));
 		
 		musicInfoMap.put(itunesAlbumSheet, 
-				itunesDaily.getDailyMusicInfos(new Object[] {webDriver, albumUrl}));
+				itunesDaily.getDailyMusicInfos(new Itunes(webDriver, albumUrl)));
 		
 		musicInfoMap.put(appleTrackSheet, 
-				appleMusicDaily.getDailyMusicInfos(new Object[] {webDriver, appleTrackUrl}));
+				appleMusicDaily.getDailyMusicInfos(new Itunes(webDriver, appleTrackUrl)));
 		
 		return musicInfoMap;
 	}

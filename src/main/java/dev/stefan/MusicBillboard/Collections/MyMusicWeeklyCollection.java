@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 import dev.stefan.MusicBillboard.Bean.MusicInfo;
 import dev.stefan.MusicBillboard.Expection.MusicInfoException;
+import dev.stefan.MusicBillboard.Operator.MyMusic;
 import dev.stefan.MusicBillboard.Weekly.MyMusicWeekly;
 
 public class MyMusicWeeklyCollection extends BasicCollection {
@@ -93,30 +94,30 @@ public class MyMusicWeeklyCollection extends BasicCollection {
 	public Map<String, List<MusicInfo>> getMusicInfo(WebDriver webDriver) throws MusicInfoException {
 		System.out.println("開始取得MyMusic週榜資料");
 		musicInfoMap = new HashedMap<String, List<MusicInfo>>();
-
+		
 		musicInfoMap.put(mandarinNewTrackSheet, myMusicWeekly
-				.getWeeklyWorkInfo(new Object[] { webDriver, mandarinNewTrackUrl, mandarinNewTrackPageNum }));
+				.getWeeklyWorkInfo(new MyMusic(webDriver, mandarinNewTrackUrl, mandarinNewTrackPageNum)));
 
 		musicInfoMap.put(mandarinTrackSheet, myMusicWeekly
-				.getWeeklyWorkInfo(new Object[] { webDriver, mandarinTrackUrl, mandarinTrackPageNum }));
+				.getWeeklyWorkInfo(new MyMusic(webDriver, mandarinTrackUrl, mandarinTrackPageNum)));
 
 		musicInfoMap.put(mandarinNewAlbumSheet, myMusicWeekly
-				.getWeeklyWorkInfo(new Object[] { webDriver, mandarinNewAlbumUrl, mandarinNewAlbumPageNum }));
+				.getWeeklyWorkInfo(new MyMusic(webDriver, mandarinNewAlbumUrl, mandarinNewAlbumPageNum)));
 
 		musicInfoMap.put(mandarinAlbumSheet, myMusicWeekly
-				.getWeeklyWorkInfo(new Object[] { webDriver, mandarinAlbumUrl, mandarinAlbumPageNum }));
+				.getWeeklyWorkInfo(new MyMusic(webDriver, mandarinAlbumUrl, mandarinAlbumPageNum)));
 
 		musicInfoMap.put(movieTrackSheet, myMusicWeekly
-				.getWeeklyWorkInfo(new Object[] { webDriver, movieTrackUrl, movieTrackPageNum }));
+				.getWeeklyWorkInfo(new MyMusic(webDriver, movieTrackUrl, movieTrackPageNum)));
 
 		musicInfoMap.put(movieAlbumSheet, myMusicWeekly
-				.getWeeklyWorkInfo(new Object[] { webDriver, movieAlbumUrl, movieAlbumPageNum }));
-
+				.getWeeklyWorkInfo(new MyMusic(webDriver, movieAlbumUrl, movieAlbumPageNum)));
+		
 		musicInfoMap.put(hiphopTrackSheet, myMusicWeekly
-				.getWeeklyWorkInfo(new Object[] { webDriver, hiphopTrackUrl, hiphopTrackPageNum }));
+				.getWeeklyWorkInfo(	new MyMusic(webDriver, hiphopTrackUrl, hiphopTrackPageNum)));
 
 		musicInfoMap.put(hiphopAlbumSheet, myMusicWeekly
-				.getWeeklyWorkInfo(new Object[] { webDriver, hiphopAlbumUrl, hiphopAlbumPageNum }));
+				.getWeeklyWorkInfo(	new MyMusic(webDriver, hiphopAlbumUrl, hiphopAlbumPageNum)));
 
 		return musicInfoMap;
 	}

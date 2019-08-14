@@ -12,6 +12,7 @@ import dev.stefan.MusicBillboard.Bean.MusicInfo;
 import dev.stefan.MusicBillboard.Enum.MusicStyleEnum;
 import dev.stefan.MusicBillboard.Enum.MusicTypeEnum;
 import dev.stefan.MusicBillboard.Expection.MusicInfoException;
+import dev.stefan.MusicBillboard.Operator.BasicOperator;
 
 public class FridayWeekly implements WeeklyWork {
 
@@ -32,16 +33,16 @@ public class FridayWeekly implements WeeklyWork {
 	private String url;
 
 	@Override
-	public List<MusicInfo> getWeeklyWorkInfo(Object[] object) throws MusicInfoException {
+	public List<MusicInfo> getWeeklyWorkInfo(BasicOperator basicBean) throws MusicInfoException {
 
-		if (!(object[0] instanceof WebDriver) || !(object[1] instanceof String)
-				|| !(object[2] instanceof MusicStyleEnum) || !(object[3] instanceof MusicTypeEnum))
+		if (!(basicBean.getObjectArray()[0] instanceof WebDriver) || !(basicBean.getObjectArray()[1] instanceof String)
+				|| !(basicBean.getObjectArray()[2] instanceof MusicStyleEnum) || !(basicBean.getObjectArray()[3] instanceof MusicTypeEnum))
 			throw new MusicInfoException(PARA_MESSAGE);
 
-		webDriver = (WebDriver) object[0];
-		url = (String) object[1];
-		musicStyleEnum = (MusicStyleEnum) object[2];
-		musicTypeEnum = (MusicTypeEnum) object[3];
+		webDriver = (WebDriver) basicBean.getObjectArray()[0];
+		url = (String) basicBean.getObjectArray()[1];
+		musicStyleEnum = (MusicStyleEnum) basicBean.getObjectArray()[2];
+		musicTypeEnum = (MusicTypeEnum) basicBean.getObjectArray()[3];
 
 		musicInfoList = new ArrayList<MusicInfo>();
 

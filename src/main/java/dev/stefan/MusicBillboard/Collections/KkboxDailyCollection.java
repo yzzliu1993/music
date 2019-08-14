@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import dev.stefan.MusicBillboard.Bean.MusicInfo;
 import dev.stefan.MusicBillboard.Daily.KkboxDaily;
 import dev.stefan.MusicBillboard.Expection.MusicInfoException;
+import dev.stefan.MusicBillboard.Operator.Kkbox;
 
 public class KkboxDailyCollection extends BasicCollection {
 
@@ -34,10 +35,10 @@ public class KkboxDailyCollection extends BasicCollection {
 		musicInfoMap = new HashedMap<String, List<MusicInfo>>();
 		
 		musicInfoMap.put(mandarinNewSheet, 
-				kkboxDaily.getDailyMusicInfos(new Object[] {webDriver, mandarinNewUrl}));
+				kkboxDaily.getDailyMusicInfos(new Kkbox(webDriver, mandarinNewUrl)));
 		
 		musicInfoMap.put(mandarinTrackSheet, 
-				kkboxDaily.getDailyMusicInfos(new Object[] {webDriver, mandarinTrackUrl}));
+				kkboxDaily.getDailyMusicInfos(new Kkbox(webDriver, mandarinTrackUrl)));
 		
 		return musicInfoMap;
 	}

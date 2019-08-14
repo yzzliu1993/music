@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import dev.stefan.MusicBillboard.Bean.MusicInfo;
 import dev.stefan.MusicBillboard.Daily.MyMusicDaily;
 import dev.stefan.MusicBillboard.Expection.MusicInfoException;
+import dev.stefan.MusicBillboard.Operator.MyMusic;
 
 public class MyMusicDailyCollection extends BasicCollection {
 
@@ -69,19 +70,19 @@ public class MyMusicDailyCollection extends BasicCollection {
 		musicInfoMap = new HashedMap<String, List<MusicInfo>>();
 		
 		musicInfoMap.put(allNewTrackSheet, 
-				myMusicDaily.getDailyMusicInfos(new Object[] {webDriver, allNewTrackUrl, allNewTrackPagNum}));
+				myMusicDaily.getDailyMusicInfos(new MyMusic(webDriver, allNewTrackUrl, allNewTrackPagNum)));
 		
 		musicInfoMap.put(allTrackSheet, 
-				myMusicDaily.getDailyMusicInfos(new Object[] {webDriver, allTrackUrl, allTrackPagNum}));
+				myMusicDaily.getDailyMusicInfos(new MyMusic(webDriver, allTrackUrl, allTrackPagNum)));
 		
 		musicInfoMap.put(mandarinTrackSheet, 
-				myMusicDaily.getDailyMusicInfos(new Object[] {webDriver, mandarinTrackUrl, mandarinTrackPagNum}));
+				myMusicDaily.getDailyMusicInfos(new MyMusic(webDriver, mandarinTrackUrl, mandarinTrackPagNum)));
 		
 		musicInfoMap.put(movieTrackSheet, 
-				myMusicDaily.getDailyMusicInfos(new Object[] {webDriver, movieTrackUrl, movieTrackPagNum}));
+				myMusicDaily.getDailyMusicInfos(new MyMusic(webDriver, movieTrackUrl, movieTrackPagNum)));
 		
 		musicInfoMap.put(hiphopTrackSheet, 
-				myMusicDaily.getDailyMusicInfos(new Object[] {webDriver, hiphopTrackUrl, hiphopTrackPagNum}));
+				myMusicDaily.getDailyMusicInfos(new MyMusic(webDriver, hiphopTrackUrl, hiphopTrackPagNum)));
 		
 		return musicInfoMap;
 	}
